@@ -1,0 +1,47 @@
+---
+title: "p8105_hw1_ao2671"
+author: "Anna Ostropolets"
+date: "9/13/2020"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problem 1
+## Problem 1, part 1
+
+```{r chunk1, echo=FALSE, message = FALSE, warning=FALSE}
+# creating a dataframe with a sample from normal distribution, logical, cahracter and factor vectors
+library(tidyverse)
+data_frame = tibble(
+
+  vec_norm_distr = rnorm(10), 
+  
+  vec_logical = vec_norm_distr>0,
+  
+  vec_char =  c ("first","second","third","forth","fifth","sixth","seventh","eighth","ninth","tenth"),
+  
+  vec_factor = factor(c("green","black", "blue", "black", "blue", "blue", "green","blue", "green","green"))
+  
+)
+
+# test if can take the mean of variables in the dataframe
+
+distrib_mean = mean(data_frame$vec_norm_distr)
+
+logical_mean = mean(data_frame$vec_logical)
+
+char_mean = mean(data_frame$vec_char) 
+
+factor_mean = mean(data_frame$vec_factor) 
+
+# print the output of the dataframe
+data_frame
+
+# answers to homework question 1
+cat('The mean of samples from distribution',distrib_mean, ';\n The mean of logical vector',logical_mean, '; \n The mean of character vector',char_mean,  ';\n The mean of factor vector',factor_mean)
+cat('Answer: We can take the mean of logical or numberic vector but not of character of factor vectors')
+```
+
