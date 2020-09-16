@@ -45,3 +45,31 @@ cat('The mean of samples from distribution',distrib_mean, ';\n The mean of logic
 cat('Answer: We can take the mean of logical or numberic vector but not of character of factor vectors')
 ```
 
+
+```{r chunk1.2, eval=FALSE}
+
+# convert logical vector to numeric
+as.numeric(data_frame$vec_logical)
+# convert character vector to numeric
+as.numeric(data_frame$vec_char)
+# convert factor vector to numeric
+as.numeric(data_frame$vec_factor)
+
+#logical variables can be converted to numbers where 1 is TRUE and 0 is FALSE, 
+#factor can be converted to numbers according to the number of levels 
+#and character variables cannot be converted to numbers. 
+#This is why we can take the mean of logical variable but not for character variables. 
+#Logical variables have to be converted to numeric prior to taking the mean
+```
+
+```{r chunk2, message = FALSE, warning=FALSE}
+# convert logical vector 
+logical_to_numeric = as.numeric(data_frame$vec_logical)*data_frame$vec_norm_distr
+logical_to_factor = as.factor(data_frame$vec_logical)*data_frame$vec_norm_distr
+logical_to_factor_to_numeric = as.numeric(as.factor(data_frame$vec_logical))*data_frame$vec_norm_distr
+
+
+logical_to_numeric
+logical_to_factor
+logical_to_factor_to_numeric
+```
