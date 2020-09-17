@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Problem 1
-## Problem 1, part 1
 
 ```{r chunk1, echo=FALSE, message = FALSE, warning=FALSE}
 # creating a dataframe with a sample from normal distribution, logical, cahracter and factor vectors
@@ -73,3 +72,44 @@ logical_to_numeric
 logical_to_factor
 logical_to_factor_to_numeric
 ```
+
+### Problem 2
+
+```{r chunk3, echo=FALSE, warning=FALSE}
+
+# load the data and explore it
+library("palmerpenguins")
+data("penguins", package = "palmerpenguins")
+# head(penguins)
+
+# calculate number of observations (rows, pinguins) and features (columns)
+ping_cnt = nrow(penguins)
+feature_cnt = ncol(penguins)
+
+# calculate numer of species and islands
+ping_species_cnt = count(distinct(penguins, species))
+island_cnt = count(distinct(penguins, island))
+
+# get the list of islands and species names
+island_list = paste(levels(head(penguins)$island), collapse=', ')
+species_list = paste(levels(head(penguins)$species), collapse=', ')
+
+# filter NA and compute mean flipper lenght
+mean_flipper = mean(filter(penguins,!is.na(flipper_length_mm))$flipper_length_mm)
+
+
+# description of dataset
+paste('The dataset has ', feature_cnt, ' columns and contains the information about ', ping_cnt, ' pinguings from ', ping_species_cnt,' species of pinguings ',
+' living on ', island_cnt, ' islands. The date specifies their ',colnames(penguins)[7], ' and ', colnames(penguins)[8], 
+'as well as bill characteristics. Islands include ', island_list, ' and species include ', species_list, 
+'Mean flipper length is ', mean_flipper)
+
+# plot bill and flipper lenght and group them by species
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species))  + 
+  labs(title="Correlation of bill and flipper length",x="Bill, mm", y = "Flipper, mm") +
+  geom_point()
+ggsave("scatterplot.jpg", height = 4, width = 6)
+
+```
+
+
